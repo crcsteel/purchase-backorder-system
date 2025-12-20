@@ -1,0 +1,66 @@
+
+
+            <div class="main-wrapper">
+                <div class="container">
+
+                <!-- HEADER -->
+                <div class="header">
+                    <div class="header-center">
+                    <h1 id="calendar-title" class="header-title">
+                        ปฏิทินการขอซื้อสินค้าและการเปิดใบสั่งซื้อ                       
+                    </h1>
+                    </div>
+                    <div class="header-right"></div>
+                </div>
+
+                <!-- CONTROLS -->
+                <div class="controls">
+                    <div class="nav-buttons">
+
+                    <button class="btn" id="prev-month">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+
+                    <div class="selectors">
+                        <select id="month-select"></select>
+                        <select id="year-select"></select>
+                    </div>
+
+                    <button class="btn" id="next-month">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+
+                    </div>
+
+                    <div class="month-year-display" id="month-year-display"></div>
+                </div>
+
+                <!-- ERROR -->
+                <div id="error" class="error-message" style="display:none;"></div>
+
+                <!-- CALENDAR -->
+                <div class="calendar-grid" id="calendar-grid"></div>
+
+                </div>
+            </div>
+            </div>
+
+            <div id="transaction-modal" class="modal">
+
+            <div class="modal-overlay"></div>
+
+            <div class="modal-box">
+
+                <button id="close-modal" class="modal-close">
+                <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <h3 id="modal-date-title" class="modal-title"></h3>
+                <div class="modal-toggle">
+                <button id="btn-all" class="active">รายการ PR ทั้งหมด</button>
+                <button id="btn-diff">รายการยังไม่เปิด PO </button>
+                </div>
+                <div id="transaction-list" class="modal-list"></div>
+
+            </div>
+            </div>

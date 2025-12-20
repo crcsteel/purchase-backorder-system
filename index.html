@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goods Receiving & Tracking System</title>
+    <link href="https://fonts.googleapis.com/css2?family=K2D:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="./css/styles.css" rel="stylesheet">
+    <link href="./css/calendar.css" rel="stylesheet">
+    <link href="./css/page4.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-box">
+            <div class="loader"></div>
+            <p>กำลังโหลดข้อมูล...</p>
+        </div>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+        <div class="logo">
+            <div class="logo-icon">
+                <img src="logo.png" alt="CRC Logo">
+            </div>
+
+            <div class="logo-text">
+                <span class="title-en">Goods Receiving System</span><br>
+                <span class="title-th">ระบบตรวจรับสินค้าประจำวัน</span>
+            </div>
+        </div>
+            <div class="nav-actions">
+                <ul class="nav-actions">
+                    <li class="menu-item  active" onclick="showPage('page3')">ติดตามการสั่งซื้อ</li>
+                    <li class="menu-item" onclick="showPage('page2')">สินค้าเข้าประจำวัน</li>
+                    <li class="menu-item" onclick="showPage('page1')">ติดตามสินค้าค้างรับ</li>
+                    <li class="menu-item" onclick="showPage('page4')">New Issue</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!-- ===== MAIN ===== -->
+<main class="main-content">
+  <div id="page1" class="page hidden"></div>
+  <div id="page2" class="page hidden"></div>
+  <div id="page3" class="page"></div>
+  <div id="page4" class="page hidden"></div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+
+    <div class="footer-left">
+      <div class="footer-title">Warehouse Management System</div>
+      <div class="footer-sub">ระบบจัดการข้อมูลภายในองค์กร</div>
+    </div>
+
+    <div class="footer-center">
+      <span>© <span id="footer-year"></span> CRC Steel</span>
+      <span class="dot">•</span>
+      <span>All rights reserved</span>
+    </div>
+
+    <div class="footer-right">
+    <span class="footer-title">Version 1.0.0</span>
+    </div>
+</footer>
+
+<script>
+async function loadPage(id, file, callback) {
+  const res = await fetch(`pages/${file}`);
+  document.getElementById(id).innerHTML = await res.text();
+  if (callback) callback();
+}
+
+window.onload = () => {
+  loadPage("page1", "page1.html", initPage1);
+  loadPage("page2", "page2.html", initPage2);
+  loadPage("page3", "page3.html", initPage3);
+  loadPage("page4", "page4.html", initPage4);
+  document.getElementById("footer-year").innerText = new Date().getFullYear();
+};
+
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+
+  document.querySelectorAll(".menu-item").forEach(m => m.classList.remove("active"));
+  const map = { page3:0, page2:1, page1:2, page4:3 };
+  document.querySelectorAll(".menu-item")[map[id]].classList.add("active");
+}
+</script>
+
+<script src="./script/app.js"></script>
+<script src="./script/calendar.js"></script>
+<script src="./script/page4.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+                <div class="filter-panel">
+                    <div class="filter-header">
+                        <div class="filter-header-left">
+                            <i class="fa-solid fa-filter"></i>
+                            <h3 class="filter-title">กรองข้อมูล</h3>
+                        </div>
+
+                        <button class="filter-toggle" onclick="toggleFilters()">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="filter-grid" id="filterGrid">
+                        <div class="filter-group">
+                            <label class="filter-label">สาขา</label>
+                            <select class="filter-input">
+                                <option>ทุกสาขา</option>
+                                <option>สุรินทร์</option>
+                                <option>นางรอง</option>
+                                <option>เดชอุดม</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">ผู้จำหน่าย</label>
+                            <input type="text" class="filter-input" placeholder="Search supplier...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">กลุ่ม</label>
+                             <input type="text" class="filter-input" placeholder="Search Product Group...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">รหัส</label>
+                             <input type="text" class="filter-input" placeholder="Search Product Code...">
+                        </div>                        
+                    </div>
+                    <div class="filter-chips">
+                        <div class="chip active">All</div>
+                        <div class="chip">Today</div>
+                        <div class="chip">This Week</div>
+                        <div class="chip">This Month</div>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">รายการสินค้าค้างรับและแผนประมาณการวันที่รับเข้า</h3>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th onclick="sortIncoming(0)">สาขา <i id="sortIcon0" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(1)">วันที่สั่งซื้อ <i id="sortIcon1" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(2)">กลุ่ม <i id="sortIcon2" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(3)">รหัส <i id="sortIcon3" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(4)">รายละเอียด <i id="sortIcon4" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(5)">จำนวนสั่งซื้อ <i id="sortIcon5" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(6)">หน่วย <i id="sortIcon6" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(7)">จำนวนค้างรับ <i id="sortIcon7" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(8)">หน่วย <i id="sortIcon8" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(9)">ผู้จำหน่าย <i id="sortIcon9" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortIncoming(10)">หมายเหตุ <i id="sortIcon10" class="fa-solid fa-sort"></i></th>
+                                <th>สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incomingBody">
+
+                        </tbody>
+                    </table>
+
+                    <div id="incomingPagination" class="pagination" style="margin: 28PX;"></div>
+
+                    <!-- Mobile Card View -->
+                    <div class="card-list">
+                        <div id="incomingCards" class="card-list"></div>
+                    </div>
+                </div>

@@ -1,0 +1,456 @@
+/* ============================================================
+   PAGE 3 – CALENDAR (SCOPED 100%)
+============================================================ */
+
+/* BASE ------------------------------ */
+
+#page3 {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-y: auto;
+
+}
+
+#page3 * {
+  box-sizing: border-box;
+  font-family: 'K2D',  sans-serif;
+}
+
+/* WRAPPER ------------------------------ */
+
+#page3 .main-wrapper {
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#page3 .container {
+  width: 100%;
+  max-width: 1400px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  margin: 0 auto;
+}
+
+/* FONT CONTROL ------------------------------ */
+
+#page3 .num,
+#page3 .payment-amount,
+#page3 .day-number,
+#page3 .transaction-total,
+#page3 select option,
+#page3 input[type="number"],
+#page3 .number-font {
+  font-family: "Inconsolata", monospace !important;
+}
+
+#page3 .text,
+#page3 .label,
+#page3 .holiday-name,
+#page3 .day-header,
+#page3 .modal-title,
+#page3 .transaction-label {
+  font-family: 'K2D', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* PAYMENT COLOR ------------------------------ */
+
+#page3 .payment-amount {
+  color: #000 !important;
+}
+
+#page3 .payment-amount.zero {
+  color: #a0aec0 !important;
+}
+
+/* HEADER ------------------------------ */
+
+#page3 .header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+#page3 .header-left,
+#page3 .header-center,
+#page3 .header-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+#page3 .header-left {
+  justify-content: flex-start;
+}
+
+#page3 .header-center {
+  justify-content: center;
+}
+
+#page3 .header-right {
+  justify-content: flex-end;
+}
+
+#page3 .company-logo {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+#page3 .header-center h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #008cff;
+  margin: 0;
+}
+
+/* CONTROLS ------------------------------ */
+
+#page3 .controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+#page3 .nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+#page3 .btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: 600;
+  background: #008cff;
+  color: white;
+  transition: all 0.25s ease;
+}
+
+#page3 .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(102, 126, 234, 0.25);
+}
+
+#page3 .btn:active {
+  transform: translateY(0);
+}
+
+#page3 .month-year-display {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #333;
+}
+
+#page3 .selectors {
+  display: flex;
+  gap: 10px;
+}
+
+#page3 select {
+  padding: 10px 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  background: white;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+#page3 select:hover {
+  border-color: #008cff;
+}
+
+#page3 select:focus {
+  outline: none;
+  border-color: #008cff;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* CALENDAR GRID ------------------------------ */
+
+#page3 .calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.35s ease;
+}
+
+#page3 .day-header {
+  text-align: center;
+  font-weight: 700;
+  padding: 15px 5px;
+  background: #f7fafc;
+  border-radius: 8px;
+  font-size: 1em;
+  color: #4a5568;
+}
+
+#page3 .day-header.sunday {
+  color: #e53e3e;
+}
+
+/* DAY CELL ------------------------------ */
+
+#page3 .day-cell {
+  min-height: 120px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+#page3 .day-cell:hover {
+  border-color: #008cff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(102, 126, 234, 0.25);
+}
+
+#page3 .day-cell.empty {
+  background: #f7fafc;
+  cursor: default;
+  border-color: #edf2f7;
+}
+
+#page3 .day-cell.empty:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+#page3 .day-cell.saturday {
+  background: #ebf8ff;
+}
+
+#page3 .day-cell.sunday,
+#page3 .day-cell.holiday {
+  background: #fff5f5;
+}
+
+#page3 .day-cell.today {
+  border-color: #008cff;
+  border-width: 3px;
+}
+
+#page3 .day-number {
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #2d3748;
+}
+
+#page3 .day-cell.sunday .day-number,
+#page3 .day-cell.holiday .day-number {
+  color: #e53e3e;
+}
+
+#page3 .holiday-name {
+  font-size: 0.75em;
+  color: #e53e3e;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+#page3 .payment-amount {
+  margin-top: auto;
+  font-size: 1.1em;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* MODAL ------------------------------ */
+
+#page3 .modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+#page3 .modal.active {
+  display: flex;
+  animation: fadeInModal 0.25s ease;
+}
+
+#page3 .modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease;
+}
+
+#page3 .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+#page3 .modal-title {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #008cff;
+}
+
+#page3 .close-btn {
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  color: #9dc6da;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+}
+
+#page3 .close-btn:hover {
+  background: #ffffff;
+  color: #ff0000;
+}
+
+/* TRANSACTION ------------------------------ */
+
+#page3 .transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#page3 .transaction-item {
+  padding: 15px;
+  background: #f7fafc;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+#page3 .transaction-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+#page3 .transaction-label {
+  font-weight: 600;
+  color: #4a5568;
+}
+
+#page3 .transaction-total {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #e53e3e;
+}
+
+/* LOADING / ERROR ------------------------------ */
+
+#page3 .loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2em;
+  color: #008cff;
+}
+
+#page3 .error-message {
+  background: #fff5f5;
+  border: 2px solid #fc8181;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  color: #c53030;
+  text-align: center;
+}
+
+/* MODAL */
+#page3 .modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#page3 .modal.active {
+  display: flex;
+}
+
+#page3 .modal-box {
+  background: #fff;
+  width: min(92vw, 540px);
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  padding: 20px 18px;
+  position: relative;
+}
+
+#page3 .modal-title {
+  margin-bottom: 12px;
+}
+
+#page3 .modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* CLICKABLE DAY */
+#page3.day-cell.clickable {
+  cursor: pointer;
+}
+
+#page3 .day-cell.clickable:hover {
+  background: #f0f9ff;
+}
+
+/* ANIMATION ------------------------------ */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+

@@ -1,0 +1,74 @@
+                <div class="filter-panel">
+                    <div class="filter-header">
+                        <div class="filter-header-left">
+                            <i class="fa-solid fa-filter"></i>
+                            <h3 class="filter-title">กรองข้อมูล</h3>
+                        </div>
+
+                        <button class="filter-toggle" onclick="toggleFilters()">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="filter-grid" id="filterGrid2">
+                        <div class="filter-group">
+                            <label class="filter-label">รหัส</label>
+                            <input type="text" class="filter-input" placeholder="Search Item Code...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">เลขที่ใบสั่งซื้อ</label>
+                            <input type="text" class="filter-input" placeholder="Search PO number...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">ผู้จำหน่าย</label>
+                            <input type="text" class="filter-input" placeholder="Search Supplier...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">ขนส่ง</label>
+                            <input type="text" class="filter-input" placeholder="Search Transport Company...">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">ทะเบียนรถ</label>
+                            <input type="text" class="filter-input" placeholder="Search Registration...">
+                        </div>
+                    </div>
+                        <div class="filter-chips">
+                            <div class="chip active">ทุกสาขา</div>
+                            <div class="chip">สุรินทร์</div>
+                            <div class="chip">นางรอง</div>
+                            <div class="chip">เดชอุดม</div>
+                        </div>
+                </div>
+
+                <!-- Table -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">รายการสินค้ารับเข้าประจำวัน</h3>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th onclick="sortPending(0)">Tracking <i id="psort0" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(1)">Code <i id="psort1" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(2)">Description <i id="psort2" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(3)">Quantity <i id="psort3" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(4)">SKU <i id="psort4" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(5)">Delivery Date <i id="psort5" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(6)">Location <i id="psort6" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(7)">PO Number <i id="psort7" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(8)">Transport <i id="psort8" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(9)">Registration <i id="psort9" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(10)">Supplier <i id="psort10" class="fa-solid fa-sort"></i></th>
+                                <th onclick="sortPending(11)">Remark <i id="psort11" class="fa-solid fa-sort"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="pendingBody">
+                        </tbody>
+                    </table>
+                    <div id="pendingPagination" class="pagination" style="margin: 28px;"></div>
+
+                    <!-- Mobile Card View -->
+                    <div class="card-list">
+                        <div id="pendingCards" class="card-list"></div>
+                    </div>
+                </div>
+
