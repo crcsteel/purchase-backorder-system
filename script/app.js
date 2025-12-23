@@ -210,20 +210,62 @@ function renderIncomingPagination() {
   const box = document.getElementById("incomingPagination");
   if (!box) return;
 
-  const total = Math.ceil(filteredIncoming.length / rowsPerPage);
+  const totalPages = Math.ceil(filteredIncoming.length / rowsPerPage);
+  if (totalPages <= 1) {
+    box.innerHTML = "";
+    return;
+  }
+
+  const maxButtons = 5; // จำนวนปุ่มที่โชว์
+  let start = Math.max(1, currentPageIncoming - Math.floor(maxButtons / 2));
+  let end   = start + maxButtons - 1;
+
+  if (end > totalPages) {
+    end = totalPages;
+    start = Math.max(1, end - maxButtons + 1);
+  }
+
   let html = "";
 
-  for (let i=1;i<=total;i++) {
-    html += `<button class="${i===currentPageIncoming?'active':''}"
-      onclick="goIncomingPage(${i})">${i}</button>`;
+  // ปุ่มก่อนหน้า
+  html += `
+    <button ${currentPageIncoming === 1 ? "disabled" : ""}
+      onclick="goIncomingPage(${currentPageIncoming - 1})">
+      <i class="fa-solid fa-angle-left"></i>
+    </button>
+  `;
+
+  // ปุ่มหน้า
+  for (let i = start; i <= end; i++) {
+    html += `
+      <button class="${i === currentPageIncoming ? "active" : ""}"
+        onclick="goIncomingPage(${i})">
+        ${i}
+      </button>
+    `;
   }
+
+  // ปุ่มถัดไป
+  html += `
+    <button ${currentPageIncoming === totalPages ? "disabled" : ""}
+      onclick="goIncomingPage(${currentPageIncoming + 1})">
+      <i class="fa-solid fa-angle-right"></i>
+    </button>
+  `;
+
   box.innerHTML = html;
 }
 
+
 function goIncomingPage(p) {
+  console.log("go page:", p);
+
   currentPageIncoming = p;
+  console.log("currentPageIncoming:", currentPageIncoming);
+
   renderIncomingTable();
   renderIncomingCards();
+  renderIncomingPagination();
 }
 
 // =================================================
@@ -283,24 +325,72 @@ function chipPending(type) {
 // =================================================
 // PAGE 2 PAGINATION
 // =================================================
+// =================================================
+// PAGE 2 PAGINATION (PENDING)
+// =================================================
 function renderPendingTablePagination() {
   const box = document.getElementById("pendingPagination");
   if (!box) return;
 
-  const total = Math.ceil(filteredPending.length / rowsPerPage);
+  const totalPages = Math.ceil(filteredPending.length / rowsPerPage);
+  if (totalPages <= 1) {
+    box.innerHTML = "";
+    return;
+  }
+
+  const maxButtons = 5; // จำนวนปุ่มที่โชว์
+  let start = Math.max(1, currentPagePending - Math.floor(maxButtons / 2));
+  let end   = start + maxButtons - 1;
+
+  if (end > totalPages) {
+    end = totalPages;
+    start = Math.max(1, end - maxButtons + 1);
+  }
+
   let html = "";
 
-  for (let i=1;i<=total;i++) {
-    html += `<button class="${i===currentPagePending?'active':''}"
-      onclick="goPendingPage(${i})">${i}</button>`;
+  // ปุ่มก่อนหน้า
+  html += `
+    <button ${currentPagePending === 1 ? "disabled" : ""}
+      onclick="goPendingPage(${currentPagePending - 1})">
+      <i class="fa-solid fa-angle-left"></i>
+    </button>
+  `;
+
+  // ปุ่มเลขหน้า
+  for (let i = start; i <= end; i++) {
+    html += `
+      <button class="${i === currentPagePending ? "active" : ""}"
+        onclick="goPendingPage(${i})">
+        ${i}
+      </button>
+    `;
   }
+
+  // ปุ่มถัดไป
+  html += `
+    <button ${currentPagePending === totalPages ? "disabled" : ""}
+      onclick="goPendingPage(${currentPagePending + 1})">
+      <i class="fa-solid fa-angle-right"></i>
+    </button>
+  `;
+
   box.innerHTML = html;
 }
 
+
 function goPendingPage(p) {
+  console.log("go pending page:", p);
+
+  const totalPages = Math.ceil(filteredPending.length / rowsPerPage);
+  if (p < 1 || p > totalPages) return;
+
   currentPagePending = p;
+  console.log("currentPagePending:", currentPagePending);
+
   renderPendingTable();
   renderPendingCards();
+  renderPendingTablePagination(); // 🔥 สำคัญ
 }
 
 // =================================================

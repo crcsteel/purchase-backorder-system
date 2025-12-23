@@ -741,31 +741,27 @@
             text-align: center;
         }
 
-        .pagination button {
-            background: #e2e8f0;
-            border: none;
-            padding: 6px 12px;
-            margin: 0 3px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.2s;
-        }
+      .pagination button {
+        min-width: 36px;
+        padding: 6px 10px;
+        margin: 0 2px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        cursor: pointer;
+      }
 
-        .pagination button:hover {
-            background: #cbd5e1;
-        }
+      .pagination button.active {
+        background: #1cacff;
+        color: #fff;
+        border-color: #1cacff;
+      }
 
-        .pagination button.active {
-            background: #0ea5e9;
-            color: white;
-            font-weight: 600;
-        }
+      .pagination button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
 
-        .pagination button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
 
         /* บน Desktop แสดง Table, ซ่อน Card */
         @media (min-width: 769px) {
