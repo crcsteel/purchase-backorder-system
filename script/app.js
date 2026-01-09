@@ -105,35 +105,42 @@ function toggleFilters() {
 }
 
 // =================================================
-// FORMAT / DATE
+// FORMAT / DATE (DD/MM/YYYY only)
 // =================================================
-function formatNumber(v) {
-  if (v === null || v === undefined || v === "") return "";
-  const n = Number(v);
-  return isNaN(n) ? v : n.toLocaleString("en-US");
-}
-
 function formatDateTH(input) {
   if (!input) return "";
+
   const pad = n => String(n).padStart(2, "0");
 
-  if (typeof input === "string" && input.startsWith("Date(")) {
-    const [y, m, d] = input.replace(/[Date()]/g, "").split(",");
-    return `${pad(d)}/${pad(+m + 1)}/${+y + 543}`;
+  // กรณี string แบบ DD/MM/YYYY อยู่แล้ว → คืนค่าเดิม (normalize)
+  if (typeof input === "string" && /^\d{2}\/\d{2}\/\d{4}$/.test(input)) {
+    const [d, m, y] = input.split("/");
+    return `${pad(d)}/${pad(m)}/${y}`;
   }
 
-  const dt = new Date(input);
-  if (!isNaN(dt)) {
-    return `${pad(dt.getDate())}/${pad(dt.getMonth() + 1)}/${dt.getFullYear() + 543}`;
+  // กรณี Date(yyyy,mm,dd) จาก Google Sheets
+  if (typeof input === "string" && input.startsWith("Date(")) {
+    const [y, m, d] = input.replace(/[Date()]/g, "").split(",");
+    return `${pad(d)}/${pad(+m + 1)}/${y}`;
   }
+
+  // กรณี Date object หรือ timestamp เท่านั้น
+  if (input instanceof Date || typeof input === "number") {
+    const dt = new Date(input);
+    return `${pad(dt.getDate())}/${pad(dt.getMonth() + 1)}/${dt.getFullYear()}`;
+  }
+
   return input;
 }
 
 function parseDate(str) {
   if (!str) return new Date("1900-01-01");
-  const [d, m, y] = formatDateTH(str).split("/");
-  return new Date(+y - 543, +m - 1, +d);
+
+  // รับเฉพาะ DD/MM/YYYY
+  const [d, m, y] = str.split("/");
+  return new Date(+y, +m - 1, +d);
 }
+
 
 // =================================================
 // PAGE 1 – INCOMING
@@ -159,6 +166,7 @@ function renderIncomingTable() {
       <td>${r[8] ?? ""}</td>
       <td>${r[9] ?? ""}</td>
       <td>${badge(r[10])}</td>
+      <td>${badge(r[15])}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -322,9 +330,7 @@ function chipPending(type) {
   renderPendingTablePagination();
 }
 
-// =================================================
-// PAGE 2 PAGINATION
-// =================================================
+
 // =================================================
 // PAGE 2 PAGINATION (PENDING)
 // =================================================
